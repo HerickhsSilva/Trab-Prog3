@@ -1,0 +1,60 @@
+@host = http://localhost:5207
+@id = 00000000-0000-0000-0000-000000000000
+@pagina = 1
+@tamanho = 10
+@ordem = DataCadastro
+@direcao = DESC
+
+### GET /lembretes — lista todos os lembretes ativos
+GET {{host}}/lembretes
+Accept: application/json
+
+### GET /lembretes/{id} — busca um lembrete específico
+GET {{host}}/lembretes/{{id}}
+Accept: application/json
+
+### GET /lembretes/filtro — filtros + paginação + ordenação
+GET {{host}}/lembretes/filtro?NumeroPagina={{pagina}}&TamanhoPagina={{tamanho}}&Ordem={{ordem}}&Direcao={{direcao}}&Descricao=banco
+Accept: application/json
+
+### GET /lembretes/filtro — filtro por período de cadastro
+GET {{host}}/lembretes/filtro?NumeroPagina=1&TamanhoPagina=10&Ordem=DataCadastro&Direcao=DESC&DataCadastroInicial=2026-01-01&DataCadastroFinal=2026-12-31
+Accept: application/json
+
+### GET /lembretes/filtro — filtro por período de atualização e ordenação crescente
+GET {{host}}/lembretes/filtro?NumeroPagina=1&TamanhoPagina=5&Ordem=Descricao&Direcao=ASC&DataAtualizacaoInicial=2026-01-01&DataAtualizacaoFinal=2026-12-31
+Accept: application/json
+
+### GET /lembretes/imprimir — gera o relatório PDF
+GET {{host}}/lembretes/imprimir?NumeroPagina=1&TamanhoPagina=1000&Ordem=DataCadastro&Direcao=DESC
+Accept: application/pdf
+
+### POST /lembretes — cadastra um lembrete
+POST {{host}}/lembretes
+Content-Type: application/json
+
+{
+  "descricao": "Novo lembrete criado pelo arquivo .http"
+}
+
+### PUT /lembretes/{id} — atualiza a descrição
+PUT {{host}}/lembretes/{{id}}
+Content-Type: application/json
+
+{
+  "descricao": "Descrição atualizada pelo arquivo .http"
+}
+
+### DELETE /lembretes/{id} — exclusão lógica
+DELETE {{host}}/lembretes/{{id}}
+
+### POST /lembretes — validação de campo obrigatório (400)
+POST {{host}}/lembretes
+Content-Type: application/json
+
+{
+  "descricao": "   "
+}
+
+### GET /lembretes/{id} — identificador inválido (400)
+GET {{host}}/lembretes/nao-e-guid

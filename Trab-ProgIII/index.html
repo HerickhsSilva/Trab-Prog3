@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4f46e5">
+    <meta name="description" content="Gerenciamento de lembretes com filtros, paginação e ordenação.">
+
+    <title>Meus Lembretes</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <a class="skip-link" href="#conteudo">Ir para o conteúdo principal</a>
+
+    <div class="app">
+        <!-- CABEÇALHO -->
+        <header class="hero">
+            <div class="hero__text">
+                <p class="hero__eyebrow">Programação III</p>
+                <h1>Meus Lembretes</h1>
+                <p class="hero__subtitle">Organize, encontre e atualize suas anotações.</p>
+            </div>
+
+            <div class="hero__actions">
+                <button type="button" id="btnImprimir" class="btn btn--light">Imprimir PDF</button>
+                <button type="button" id="btnNovo" class="btn btn--accent">Novo lembrete</button>
+            </div>
+        </header>
+
+        <main id="conteudo" class="content">
+            <!-- FILTROS -->
+            <section class="card filters" aria-labelledby="tituloFiltros">
+                <div class="card__head">
+                    <div>
+                        <h2 id="tituloFiltros" class="card__title">Filtros</h2>
+                        <p class="card__subtitle">Refine a listagem por descrição e período de cadastro ou atualização.</p>
+                    </div>
+                </div>
+
+                <div class="filters__grid">
+                    <div class="field field--search">
+                        <label for="filtroDescricao">Descrição</label>
+                        <input type="search" id="filtroDescricao" placeholder="Pesquisar por descrição..." autocomplete="off">
+                    </div>
+
+                    <div class="field">
+                        <label for="dataCadastroInicial">Cadastro — de</label>
+                        <input type="date" id="dataCadastroInicial">
+                    </div>
+
+                    <div class="field">
+                        <label for="dataCadastroFinal">Cadastro — até</label>
+                        <input type="date" id="dataCadastroFinal">
+                    </div>
+
+                    <div class="field">
+                        <label for="dataAtualizacaoInicial">Atualização — de</label>
+                        <input type="date" id="dataAtualizacaoInicial">
+                    </div>
+
+                    <div class="field">
+                        <label for="dataAtualizacaoFinal">Atualização — até</label>
+                        <input type="date" id="dataAtualizacaoFinal">
+                    </div>
+
+                    <div class="field">
+                        <label for="tamanhoPagina">Registros por página</label>
+                        <select id="tamanhoPagina">
+                            <option value="5">5 registros</option>
+                            <option value="10" selected>10 registros</option>
+                            <option value="20">20 registros</option>
+                            <option value="50">50 registros</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="filters__footer">
+                    <button type="button" id="btnLimparFiltros" class="btn btn--ghost">Limpar filtros</button>
+                    <button type="button" id="btnFiltrar" class="btn btn--primary">Filtrar</button>
+                </div>
+            </section>
+
+            <!-- LISTAGEM -->
+            <section class="card" aria-labelledby="tituloListagem">
+                <div class="card__head">
+                    <div>
+                        <h2 id="tituloListagem" class="card__title">Lembretes</h2>
+                        <p class="card__subtitle">Clique no título de uma coluna para ordenar os registros.</p>
+                    </div>
+                </div>
+
+                <div class="table-wrap">
+                    <table id="tabelaLembretes" aria-describedby="resumoPaginacao">
+                        <thead>
+                            <tr>
+                                <th scope="col" data-coluna="Descricao">
+                                    <button type="button" class="sort" data-campo="Descricao">Descrição</button>
+                                </th>
+
+                                <th scope="col" data-coluna="DataCadastro">
+                                    <button type="button" class="sort" data-campo="DataCadastro">Cadastro</button>
+                                </th>
+
+                                <th scope="col" data-coluna="DataAtualizacao">
+                                    <button type="button" class="sort" data-campo="DataAtualizacao">Atualização</button>
+                                </th>
+
+                                <th scope="col" data-coluna="IsAtivo">
+                                    <button type="button" class="sort" data-campo="IsAtivo">Status</button>
+                                </th>
+
+                                <th scope="col" class="th-actions">Ações</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="listaLembretes"></tbody>
+                    </table>
+
+                    <!-- ESTADO VAZIO -->
+                    <div id="mensagemVazia" class="state hidden">
+                        <h3>Nenhum lembrete encontrado</h3>
+                        <p id="textoVazio">Cadastre seu primeiro lembrete para começar.</p>
+                        <button type="button" id="btnNovoVazio" class="btn btn--primary btn--sm">Cadastrar lembrete</button>
+                    </div>
+
+                    <!-- ESTADO DE ERRO -->
+                    <div id="estadoErro" class="state hidden" role="alert">
+                        <h3>Não foi possível carregar os lembretes</h3>
+                        <p id="textoErro">Verifique se a API está em execução e tente novamente.</p>
+                        <button type="button" id="btnTentarNovamente" class="btn btn--primary btn--sm">Tentar novamente</button>
+                    </div>
+                </div>
+
+                <!-- PAGINAÇÃO -->
+                <div class="table-footer">
+                    <p id="resumoPaginacao" class="table-footer__info">Mostrando 0 de 0 registros</p>
+
+                    <nav class="pagination" aria-label="Paginação da listagem">
+                        <button type="button" id="btnPrimeira" class="pagination__btn" aria-label="Primeira página" title="Primeira página">«</button>
+                        <button type="button" id="btnAnterior" class="pagination__btn" aria-label="Página anterior" title="Página anterior">‹</button>
+
+                        <div id="paginas" class="pagination__pages"></div>
+
+                        <button type="button" id="btnProximo" class="pagination__btn" aria-label="Próxima página" title="Próxima página">›</button>
+                        <button type="button" id="btnUltima" class="pagination__btn" aria-label="Última página" title="Última página">»</button>
+                    </nav>
+                </div>
+            </section>
+
+            <footer class="page-footer">
+                <p>UMFG · Programação III · API de Lembretes</p>
+                <p id="statusApi" class="status-api">Conectado à API</p>
+            </footer>
+        </main>
+    </div>
+
+    <!-- MODAL DE CADASTRO / EDIÇÃO -->
+    <dialog id="dialogoFormulario" class="modal" aria-labelledby="tituloFormulario">
+        <form id="formLembrete" class="modal__form" novalidate>
+            <header class="modal__head">
+                <div class="modal__heading">
+                    <h2 id="tituloFormulario">Novo lembrete</h2>
+                    <p id="subtituloFormulario">Preencha a descrição para cadastrar um novo lembrete.</p>
+                </div>
+
+                <button type="button" id="btnFecharFormulario" class="modal__close" aria-label="Fechar formulário">×</button>
+            </header>
+
+            <div class="modal__body">
+                <input type="hidden" id="lembreteId">
+
+                <div class="field">
+                    <label for="descricao">Descrição <span class="required">*</span></label>
+                    <textarea id="descricao" rows="5" maxlength="500" placeholder="Ex.: Revisar o conteúdo de Programação III antes da prova..." required aria-describedby="ajudaDescricao contadorDescricao erroDescricao"></textarea>
+
+                    <div class="field__footer">
+                        <p id="ajudaDescricao" class="field__hint">Campo obrigatório. Máximo de 500 caracteres.</p>
+                        <span id="contadorDescricao" class="field__counter">0/500</span>
+                    </div>
+
+                    <p id="erroDescricao" class="field__error hidden" role="alert"></p>
+                </div>
+            </div>
+
+            <footer class="modal__actions">
+                <button type="button" id="btnCancelar" class="btn btn--ghost">Cancelar</button>
+                <button type="submit" id="btnSalvar" class="btn btn--primary">
+                    <span id="textoBtnSalvar">Salvar lembrete</span>
+                </button>
+            </footer>
+        </form>
+    </dialog>
+
+    <!-- MODAL DE EXCLUSÃO -->
+    <dialog id="dialogoExclusao" class="modal modal--sm" aria-labelledby="tituloExclusao">
+        <div class="modal__form">
+            <header class="modal__head">
+                <div class="modal__heading">
+                    <h2 id="tituloExclusao">Excluir lembrete</h2>
+                    <p>Esta ação não pode ser desfeita.</p>
+                </div>
+
+                <button type="button" id="btnFecharExclusao" class="modal__close" aria-label="Fechar confirmação">×</button>
+            </header>
+
+            <div class="modal__body">
+                <p class="confirm-text">Deseja realmente excluir o lembrete abaixo?</p>
+                <blockquote id="descricaoExclusao" class="confirm-quote"></blockquote>
+            </div>
+
+            <footer class="modal__actions">
+                <button type="button" id="btnCancelarExclusao" class="btn btn--ghost">Cancelar</button>
+                <button type="button" id="btnConfirmarExclusao" class="btn btn--danger">
+                    <span id="textoBtnExcluir">Excluir</span>
+                </button>
+            </footer>
+        </div>
+    </dialog>
+
+    <!-- NOTIFICAÇÕES -->
+    <div id="toast" class="toast" role="status" aria-live="polite">
+        <div class="toast__content">
+            <strong id="toastTitulo" class="toast__title"></strong>
+            <p id="toastMensagem" class="toast__message"></p>
+        </div>
+
+        <button type="button" id="toastFechar" class="toast__close" aria-label="Fechar notificação">×</button>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+[
+  {
+    "id": "0e21b4b3-df71-47dc-a8b7-ff5f67483db9",
+    "descricao": "Estudar banco de dados MySQL",
+    "dataCadastro": "2026-11-20T17:02:51.786265",
+    "dataAtualizacao": "2026-11-20T17:02:51.786265",
+    "isAtivo": true
+  },
+  {
+    "id": "2ff66622-cad7-4a15-adcf-e847948afee7",
+    "descricao": "Revisar conte\u00FAdo de Programa\u00E7\u00E3o III",
+    "dataCadastro": "2026-11-20T17:02:50.733053",
+    "dataAtualizacao": "2026-11-20T17:02:50.733055",
+    "isAtivo": true
+  },
+  {
+    "id": "3aa697e5-94d0-4fb4-811a-dfa0dd301fe7",
+    "descricao": "Comprar material para o projeto",
+    "dataCadastro": "2026-11-20T17:02:52.684062",
+    "dataAtualizacao": "2026-11-20T17:02:52.684062",
+    "isAtivo": true
+  },
+  {
+    "id": "606e15fd-5a56-4122-8391-92b5fb6d86ac",
+    "descricao": "Fazer backup do banco de dados",
+    "dataCadastro": "2026-11-20T17:02:53.421017",
+    "dataAtualizacao": "2026-11-20T17:02:53.421017",
+    "isAtivo": true
+  },
+  {
+    "id": "61008fd3-ba5d-4b81-8683-041ac5c96e23",
+    "descricao": "Corrigir exerc\u00EDcios de JavaScript",
+    "dataCadastro": "2026-11-20T17:02:52.310219",
+    "dataAtualizacao": "2026-11-20T17:02:52.310219",
+    "isAtivo": true
+  },
+  {
+    "id": "6de03db5-224a-4801-b653-8065b3108f0c",
+    "descricao": "Configurar CORS no back-end",
+    "dataCadastro": "2026-11-20T17:02:53.033116",
+    "dataAtualizacao": "2026-11-20T17:02:53.033116",
+    "isAtivo": true
+  },
+  {
+    "id": "a9bdd016-e0dc-411f-9b4a-7dff53b3771e",
+    "descricao": "Testar endpoints da API de lembretes",
+    "dataCadastro": "2026-11-20T17:02:52.865214",
+    "dataAtualizacao": "2026-11-20T17:02:52.865215",
+    "isAtivo": true
+  },
+  {
+    "id": "ada8dbf5-d283-4057-b4ff-f519a4b721de",
+    "descricao": "Atualizar portf\u00F3lio no GitHub",
+    "dataCadastro": "2026-11-20T17:02:52.492813",
+    "dataAtualizacao": "2026-11-20T17:02:52.492813",
+    "isAtivo": true
+  },
+  {
+    "id": "b23bf75d-a252-4c69-a0dc-deeebfd1a218",
+    "descricao": "Ler documenta\u00E7\u00E3o do Entity Framework",
+    "dataCadastro": "2026-11-20T17:02:53.220379",
+    "dataAtualizacao": "2026-11-20T17:02:53.22038",
+    "isAtivo": true
+  },
+  {
+    "id": "b6c2e7de-44ac-431a-9ddd-2f65641cc6a5",
+    "descricao": "Reuni\u00E3o com o orientador \u00E0s 14h",
+    "dataCadastro": "2026-11-20T17:02:52.132349",
+    "dataAtualizacao": "2026-11-20T17:02:52.13235",
+    "isAtivo": true
+  },
+  {
+    "id": "ced412dc-ab5e-4dde-8436-671a0e707856",
+    "descricao": "Enviar relat\u00F3rio de atividades",
+    "dataCadastro": "2026-11-20T17:02:51.960929",
+    "dataAtualizacao": "2026-11-20T17:02:51.960929",
+    "isAtivo": true
+  },
+  {
+    "id": "f6ea4aa7-54e7-4033-98c6-1d611faad505",
+    "descricao": "Preparar apresenta\u00E7\u00E3o do trabalho final",
+    "dataCadastro": "2026-11-20T17:02:51.612578",
+    "dataAtualizacao": "2026-11-20T17:02:51.612578",
+    "isAtivo": true
+  },
+  {
+    "id": "59f7239c-ede8-4590-9f24-456ed8fc9ddb",
+    "descricao": "TESTE SIMPLES 1795228027758 (editado)",
+    "dataCadastro": "2026-11-20T23:27:07.8602068-03:00",
+    "dataAtualizacao": "2026-11-20T23:27:12.6080104-03:00",
+    "isAtivo": false
+  },
+  {
+    "id": "e547678e-be05-4e1e-9c95-5b1f80f5cf4f",
+    "descricao": "sad",
+    "dataCadastro": "2026-11-20T23:30:33.2065816-03:00",
+    "dataAtualizacao": "2026-11-20T23:30:43.2973172-03:00",
+    "isAtivo": false
+  }
+]
